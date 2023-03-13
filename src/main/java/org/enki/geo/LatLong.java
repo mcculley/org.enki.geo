@@ -174,7 +174,7 @@ public class LatLong {
      * @return the dot product
      */
     private static double dotProduct(final LatLong a, final LatLong b, final LatLong c) {
-        // FIXME: This probably breaks around 0º an 180º longitude. Add test cases for that and fix.
+        // FIXME: This probably breaks around 0º and 180º longitude. Add test cases for that and fix.
         final double abx = b.longitude - a.longitude;
         final double aby = b.latitude - a.latitude;
         final double acx = c.longitude - a.longitude;
