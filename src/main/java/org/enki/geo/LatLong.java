@@ -174,6 +174,7 @@ public class LatLong {
      * @return the dot product
      */
     private static double dotProduct(final LatLong a, final LatLong b, final LatLong c) {
+        // FIXME: This probably breaks around 0º an 180º longitude. Add test cases for that and fix.
         final double abx = b.longitude - a.longitude;
         final double aby = b.latitude - a.latitude;
         final double acx = c.longitude - a.longitude;
@@ -191,7 +192,7 @@ public class LatLong {
      */
     public List<LatLong> remainingRoute(final List<LatLong> route) {
         if (route.size() < 3) {
-            // FIXME: Handle small routes.
+            // FIXME: Handle small routes correctly. This assumes that we are somewhere along a route of only two points.
             return List.of(this, route.get(route.size() - 1));
         }
 
@@ -221,10 +222,10 @@ public class LatLong {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LatLong latLong = (LatLong) o;
+        final LatLong latLong = (LatLong) o;
         return Double.compare(latLong.latitude, latitude) == 0 &&
                 Double.compare(latLong.longitude, longitude) == 0;
     }
