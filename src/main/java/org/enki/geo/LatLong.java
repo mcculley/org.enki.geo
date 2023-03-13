@@ -1,5 +1,6 @@
 package org.enki.geo;
 
+import com.google.common.collect.ImmutableList;
 import tech.units.indriya.quantity.Quantities;
 
 import javax.measure.Quantity;
@@ -162,6 +163,61 @@ public class LatLong {
         final double θ = atan2(sin(Δlong) * cos(lat2), cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(Δlong));
         final double headingInDegrees = toDegrees(θ);
         return Quantities.getQuantity(headingInDegrees < 0 ? 360 + headingInDegrees : headingInDegrees, DEGREE_ANGLE);
+    }
+
+    /**
+     * Given two vectors ab and ac described by location objects a, b, and c, compute the dot product.
+     *
+     * @param a the start point of the vector ab
+     * @param b the end point of the vector ab
+     * @param c the end point of the vector ac
+     * @return the dot product
+     */
+    private static double dotProduct(final LatLong a, final LatLong b, final LatLong c) {
+        final double abx = b.longitude - a.longitude;
+        final double aby = b.latitude - a.latitude;
+        final double acx = c.longitude - a.longitude;
+        final double acy = c.latitude - a.latitude;
+        return abx * acx + aby * acy;
+    }
+
+    /**
+     * Given a route, return the remaining route, assuming this location is somewhere before or along the route, but not
+     * necessarily collinear with the route.
+     *
+     * @param route A route
+     * @return The remaining route, which should either be location and the initial route, or location and the remaining
+     * points on the route.
+     */
+    public List<LatLong> remainingRoute(final List<LatLong> route) {
+        if (route.size() < 3) {
+            // FIXME: Handle small routes.
+            return List.of(this, route.get(route.size() - 1));
+        }
+
+        final int n = route.size();
+        final double[] distance = new double[n];
+        double closestDistance = Double.MAX_VALUE;
+        int closestIndex = -1;
+        for (int i = 0; i < n; i++) {
+            distance[i] = distance(route.get(i)).getValue().doubleValue();
+            if (distance[i] < closestDistance) {
+                closestDistance = distance[i];
+                closestIndex = i;
+            }
+        }
+
+        if (closestIndex == n - 1) {
+            return List.of(this, route.get(route.size() - 1));
+        }
+
+        final double dotProduct = dotProduct(route.get(closestIndex), route.get(closestIndex + 1), this);
+        final int bestIndex = dotProduct < 0 ? closestIndex : closestIndex + 1;
+
+        final ImmutableList.Builder<LatLong> newList = new ImmutableList.Builder<>();
+        newList.add(this);
+        newList.addAll(route.subList(bestIndex, n));
+        return newList.build();
     }
 
     @Override
