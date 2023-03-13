@@ -226,8 +226,7 @@ public class LatLong {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final LatLong latLong = (LatLong) o;
-        return Double.compare(latLong.latitude, latitude) == 0 &&
-                Double.compare(latLong.longitude, longitude) == 0;
+        return Double.compare(latLong.latitude, latitude) == 0 && Double.compare(latLong.longitude, longitude) == 0;
     }
 
     @Override
