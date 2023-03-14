@@ -1,4 +1,4 @@
-Some useful utilities.
+Some useful utilities for geography and geometry.
 
 ![Maven Package](https://github.com/mcculley/EnkiCore/workflows/Maven%20Package/badge.svg)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/mcculley/EnkiCore.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/mcculley/EnkiCore/alerts/)
@@ -9,7 +9,7 @@ To add this to your project:
 ```
 <dependency>
   <groupId>org.enki</groupId>
-  <artifactId>core</artifactId>
-  <version>[0.0.29,)</version>
+  <artifactId>geo</artifactId>
+  <version>[0.0.68,)</version>
 </dependency>
 ```
