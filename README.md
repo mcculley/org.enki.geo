@@ -1,6 +1,6 @@
 Some useful utilities for geography and geometry.
 
-[![javadoc](https://javadoc.io/badge2/org.enki/geo/javadoc.svg)](https://javadoc.io/geo/org.enki/core)
+[![javadoc](https://javadoc.io/badge2/org.enki/geo/javadoc.svg)](https://javadoc.io/doc/org.enki/geo)
 
 To add this to your Maven project:
 ```
