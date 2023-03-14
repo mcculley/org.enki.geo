@@ -260,13 +260,18 @@ public class LatLong {
 
     // FIXME: Handle altitude in geo URI.
 
+    private static String formatWithoutTrailingZeros(final double x) {
+        return Double.toString(x).replaceAll("\\.?0*$", "");
+    }
+
     /**
      * Convert this location to a geo URI (https://datatracker.ietf.org/doc/html/rfc5870).
      *
      * @return this location encoded as a geo URI.
      */
     public @NotNull URI toGeoURI() {
-        return URI.create(String.format("geo:%f,%f", latitude, longitude));
+        return URI.create(String.format("geo:%s,%s", formatWithoutTrailingZeros(latitude),
+                formatWithoutTrailingZeros(longitude)));
     }
 
     /**

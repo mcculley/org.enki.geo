@@ -220,13 +220,22 @@ class LatLongTest {
 
     @Test
     public void testGeoURI() {
-        final LatLong a = new LatLong(25.250, -80.125);
-        assertEquals(a, new LatLong(URI.create("geo:25.250,-80.125")));
         assertThrows(IllegalArgumentException.class, () -> new LatLong(URI.create("geography:25.250,-80.125")));
+
         assertThrows(IllegalArgumentException.class, () -> new LatLong(URI.create("geo:91,0")));
         assertThrows(IllegalArgumentException.class, () -> new LatLong(URI.create("geo:-91,0")));
         assertThrows(IllegalArgumentException.class, () -> new LatLong(URI.create("geo:0,181")));
         assertThrows(IllegalArgumentException.class, () -> new LatLong(URI.create("geo:0,-181")));
+
+        final LatLong a = new LatLong(25.25, -80.125);
+        final URI ag = URI.create("geo:25.25,-80.125");
+        assertEquals(a, new LatLong(ag));
+        assertEquals(ag, new LatLong(ag).toGeoURI());
+
+        final LatLong b = new LatLong(25, -80);
+        final URI bg = URI.create("geo:25,-80");
+        assertEquals(b, new LatLong(bg));
+        assertEquals(bg, new LatLong(bg).toGeoURI());
     }
 
 }
