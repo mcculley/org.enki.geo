@@ -321,7 +321,7 @@ public class LatLong {
         }
 
         /**
-         * Gets a string representation of the location that use the cardinal directions instead of a sign
+         * Gets a string representation of the location that use the cardinal directions instead of a sign.
          *
          * @return the string representation
          */
