@@ -1,5 +1,7 @@
 package org.enki.geo;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.measure.Quantity;
 import javax.measure.quantity.Angle;
 import java.awt.geom.Point2D;
@@ -18,7 +20,7 @@ public class PolarCoordinates {
      * @param r     the radius of the point
      * @param theta the angle of the point
      */
-    public PolarCoordinates(final double r, final Quantity<Angle> theta) {
+    public PolarCoordinates(final double r, final @NotNull Quantity<Angle> theta) {
         this.r = r;
         this.theta = theta.to(RADIAN).getValue().doubleValue();
     }
@@ -28,7 +30,7 @@ public class PolarCoordinates {
      *
      * @return a Point2D.Double
      */
-    public final Point2D.Double toCartesian() {
+    public final @NotNull Point2D.Double toCartesian() {
         return toCartesian(Function.identity(), Function.identity());
     }
 
@@ -39,8 +41,8 @@ public class PolarCoordinates {
      * @param thetaTransformer  the Function to apply to the angle
      * @return a Point2D.Double
      */
-    public final Point2D.Double toCartesian(final Function<Double, Double> radiusTransformer,
-                                            final Function<Double, Double> thetaTransformer) {
+    public final @NotNull Point2D.Double toCartesian(final @NotNull Function<Double, Double> radiusTransformer,
+                                                     final @NotNull Function<Double, Double> thetaTransformer) {
         final double transformedRadius = radiusTransformer.apply(r);
         final double rotatedTheta = thetaTransformer.apply(theta);
         final double x = transformedRadius * Math.cos(rotatedTheta);
@@ -49,7 +51,7 @@ public class PolarCoordinates {
     }
 
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return "PolarCoordinate{r=" + r + ", theta=" + theta + '}';
     }
 

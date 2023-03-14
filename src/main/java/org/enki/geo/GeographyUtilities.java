@@ -1,5 +1,7 @@
 package org.enki.geo;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.measure.Quantity;
 import javax.measure.quantity.Angle;
 
@@ -19,7 +21,7 @@ public class GeographyUtilities {
      * @param d the heading in degrees
      * @return a String describing the point of a 16-wind compass rose for the heading (e.g., "E", "WNW")
      */
-    private static String directionName(final double d) {
+    private static @NotNull String directionName(final double d) {
         if (d < 0 || d >= 360) {
             throw new IllegalArgumentException();
         }
@@ -37,7 +39,7 @@ public class GeographyUtilities {
      * @param d the heading
      * @return a String describing the point of a 16-wind compass rose for the heading (e.g., "E", "WNW")
      */
-    public static String directionName(final Quantity<Angle> d) {
+    public static @NotNull String directionName(final @NotNull Quantity<Angle> d) {
         return directionName(d.to(DEGREE_ANGLE).getValue().doubleValue());
     }
 

@@ -1,5 +1,6 @@
 package org.enki.geo;
 
+import org.jetbrains.annotations.NotNull;
 import tech.units.indriya.quantity.Quantities;
 
 import javax.measure.Quantity;
@@ -20,7 +21,7 @@ public class LatLongElevation extends LatLong {
      * @param longitude longitude in degrees
      * @param elevation elevation
      */
-    public LatLongElevation(final double latitude, final double longitude, final Quantity<Length> elevation) {
+    public LatLongElevation(final double latitude, final double longitude, final @NotNull Quantity<Length> elevation) {
         super(latitude, longitude);
         this.elevation = elevation;
     }
@@ -31,7 +32,7 @@ public class LatLongElevation extends LatLong {
      * @param b the other LatLong coordinate
      * @return distance in meters
      */
-    public Quantity<Length> distanceSquared(final LatLongElevation b) {
+    public @NotNull Quantity<Length> distanceSquared(final @NotNull LatLongElevation b) {
         final Quantity<Length> elevationDelta = b.elevation.subtract(elevation);
         return Quantities
                 .getQuantity(super.distanceSquared(b).getValue().doubleValue() +
@@ -44,16 +45,16 @@ public class LatLongElevation extends LatLong {
      * @param b the other LatLong coordinate
      * @return the distance in meters
      */
-    public Quantity<Length> distance(final LatLongElevation b) {
+    public @NotNull Quantity<Length> distance(final @NotNull LatLongElevation b) {
         return Quantities.getQuantity(Math.sqrt(distanceSquared(b).getValue().doubleValue()), METRE);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        LatLongElevation that = (LatLongElevation) o;
+        final LatLongElevation that = (LatLongElevation) o;
         return elevation.equals(that.elevation);
     }
 

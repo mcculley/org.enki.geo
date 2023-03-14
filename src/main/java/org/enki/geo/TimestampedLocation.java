@@ -1,5 +1,7 @@
 package org.enki.geo;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.time.Instant;
 import java.util.Objects;
 
@@ -7,12 +9,12 @@ public class TimestampedLocation extends LatLong {
 
     public final Instant timestamp;
 
-    public TimestampedLocation(final LatLong location, final Instant timestamp) {
+    public TimestampedLocation(final @NotNull LatLong location, final @NotNull Instant timestamp) {
         super(location);
         this.timestamp = timestamp;
     }
 
-    public TimestampedLocation(final double latitude, final double longitude, final Instant timestamp) {
+    public TimestampedLocation(final double latitude, final double longitude, final @NotNull Instant timestamp) {
         super(latitude, longitude);
         this.timestamp = timestamp;
     }
