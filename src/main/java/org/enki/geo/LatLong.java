@@ -197,13 +197,12 @@ public class LatLong {
         }
 
         final int n = route.size();
-        final double[] distance = new double[n];
         double closestDistance = Double.MAX_VALUE;
         int closestIndex = -1;
         for (int i = 0; i < n; i++) {
-            distance[i] = distance(route.get(i)).getValue().doubleValue();
-            if (distance[i] < closestDistance) {
-                closestDistance = distance[i];
+            final double distance = distance(route.get(i)).getValue().doubleValue();
+            if (distance < closestDistance) {
+                closestDistance = distance;
                 closestIndex = i;
             }
         }
