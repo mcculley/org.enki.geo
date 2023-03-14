@@ -359,6 +359,16 @@ public class LatLong {
          */
         public final double latitudeSeconds, longitudeSeconds;
 
+        /**
+         * Construct a location from degrees, minutes, and seconds components.
+         *
+         * @param latitudeDegrees  the integer component of the latitude in degrees
+         * @param latitudeMinutes  the integer component of minutes of the latitude in degrees
+         * @param latitudeSeconds  the fractional decimal component of the seconds of the latitude
+         * @param longitudeDegrees the integer component of the longitude in degrees
+         * @param longitudeMinutes the integer component of the minutes of the longitude
+         * @param longitudeSeconds the fractional decimal component of the seconds of the longitude
+         */
         public DegreesMinutesSeconds(final int latitudeDegrees, final int latitudeMinutes, final double latitudeSeconds,
                                      final int longitudeDegrees, final int longitudeMinutes,
                                      final double longitudeSeconds) {
