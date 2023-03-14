@@ -7,6 +7,9 @@ import javax.measure.quantity.Length;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static systems.uom.common.USCustomary.DEGREE_ANGLE;
 import static systems.uom.common.USCustomary.NAUTICAL_MILE;
@@ -87,6 +90,95 @@ class LatLongTest {
         assertEquals(30, ldms2.longitudeSeconds);
         assertEquals("27º 37' 30.00000000\" N, 82º 52' 30.00000000\" W", ldms2.toString());
         assertEquals(l2, ldms2.getLatLong());
+    }
+
+    private static <T> List<T> concat(final T a, final List<T> b) {
+        final List<T> l = new ArrayList<>();
+        l.add(a);
+        l.addAll(b);
+        return l;
+    }
+
+    @Test
+    public void testBeforeRoute() {
+        final LatLong location = new LatLong(5, -80);
+        final List<LatLong> route = List.of(
+                new LatLong(5, -81),
+                new LatLong(5, -82),
+                new LatLong(5, -83)
+        );
+        final List<LatLong> remainingRoute = location.remainingRoute(route);
+        assertEquals(concat(location, route), remainingRoute);
+    }
+
+    @Test
+    public void testInsideRoute() {
+        final LatLong location = new LatLong(5, -81);
+        final List<LatLong> route = List.of(
+                new LatLong(5, -80),
+                new LatLong(5, -82),
+                new LatLong(5, -83)
+        );
+        final List<LatLong> remainingRoute = location.remainingRoute(route);
+        assertEquals(List.of(
+                new LatLong(5, -81),
+                new LatLong(5, -82),
+                new LatLong(5, -83)
+        ), remainingRoute);
+    }
+
+    @Test
+    public void testInsideAboveRoute() {
+        final LatLong location = new LatLong(6, -81);
+        final List<LatLong> route = List.of(
+                new LatLong(5, -80),
+                new LatLong(5, -82),
+                new LatLong(5, -83)
+        );
+        final List<LatLong> remainingRoute = location.remainingRoute(route);
+        assertEquals(List.of(
+                new LatLong(6, -81),
+                new LatLong(5, -82),
+                new LatLong(5, -83)
+        ), remainingRoute);
+    }
+
+    @Test
+    public void testFortPierceToFortMyers() {
+        final List<LatLong> route = List.of(
+                new LatLong(27.464336, -80.316056),
+                new LatLong(27.474215, -80.276067),
+                new LatLong(27.255667, -80.169947),
+                new LatLong(27.116472, -80.111733),
+                new LatLong(27.045271, -80.074074),
+                new LatLong(26.965859, -80.048419),
+                new LatLong(26.818930, -80.000386),
+                new LatLong(26.496805, -80.021040),
+                new LatLong(26.220099, -80.060551),
+                new LatLong(25.931726, -80.067937),
+                new LatLong(25.834770, -80.075650),
+                new LatLong(25.751492, -80.078567),
+                new LatLong(25.247685, -80.160723),
+                new LatLong(25.055714, -80.302710),
+                new LatLong(24.835746, -80.572094),
+                new LatLong(24.592965, -81.297224),
+                new LatLong(24.509402, -81.734804),
+                new LatLong(24.513069, -81.817047),
+                new LatLong(24.752602, -81.882376),
+                new LatLong(26.522385, -81.993888)
+        );
+        final LatLong location = new LatLong(25.183, -80.3203);
+        final List<LatLong> remainingRoute = location.remainingRoute(route);
+        assertEquals(remainingRoute, List.of(
+                new LatLong(25.183, -80.3203),
+                new LatLong(25.055714, -80.302710),
+                new LatLong(24.835746, -80.572094),
+                new LatLong(24.592965, -81.297224),
+                new LatLong(24.509402, -81.734804),
+                new LatLong(24.513069, -81.817047),
+                new LatLong(24.752602, -81.882376),
+                new LatLong(26.522385, -81.993888)
+        ));
     }
 
 }
