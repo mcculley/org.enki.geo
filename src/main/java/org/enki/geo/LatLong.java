@@ -263,11 +263,29 @@ public class LatLong {
         return URI.create(String.format("geo:%f,%f", latitude, longitude));
     }
 
+    /**
+     * A representatin of a location as degrees with decimal minutes.
+     */
     public static class DegreesDecimalMinutes {
 
+        /**
+         * The integer components of the latitude and longitude in degrees.
+         */
         public final int latitudeDegrees, longitudeDegrees;
+
+        /**
+         * The fractional decimal component of the latitude and longitude.
+         */
         public final double latitudeDecimalMinutes, longitudeDecimalMinutes;
 
+        /**
+         * Create a new location from latitude and longitude in decimal degrees.
+         *
+         * @param latitudeDegrees the integer component of the latitude, in degrees
+         * @param latitudeDecimalMinutes the fractional decimal component of the latitude
+         * @param longitudeDegrees the integer component of the longitude, in degrees
+         * @param longitudeDecimalMinutes the fractional decimal component of the longitude
+         */
         public DegreesDecimalMinutes(final int latitudeDegrees, final double latitudeDecimalMinutes,
                                      final int longitudeDegrees, final double longitudeDecimalMinutes) {
             this.latitudeDegrees = latitudeDegrees;
@@ -276,6 +294,11 @@ public class LatLong {
             this.longitudeDecimalMinutes = longitudeDecimalMinutes;
         }
 
+        /**
+         * Create a new location from a <code>LatLong</code> location
+         *
+         * @param c the location
+         */
         public DegreesDecimalMinutes(final @NotNull LatLong c) {
             this((int) c.latitude, (abs(c.latitude) - floor(abs(c.latitude))) * 60.0, (int) c.longitude,
                     (abs(c.longitude) - floor(abs(c.longitude))) * 60.0);
@@ -286,12 +309,22 @@ public class LatLong {
                     longitudeDecimalMinutes);
         }
 
+        /**
+         * Gets a string representation of the location that use the cardinal directions instead of a sign
+         *
+         * @return the string representation
+         */
         public @NotNull String toStringCardinal() {
             return String.format("%dº %.8f' %c, %dº %.8f' %c", abs(latitudeDegrees), latitudeDecimalMinutes,
                     (latitudeDegrees > 0 ? 'N' : 'S'), abs(longitudeDegrees),
                     longitudeDecimalMinutes, (longitudeDegrees > 0 ? 'E' : 'W'));
         }
 
+        /**
+         * Gets the location as a <code>LatLong</code>
+         *
+         * @return the location
+         */
         public @NotNull LatLong getLatLong() {
             final double latitude = copySign(abs(latitudeDegrees) + latitudeDecimalMinutes / 60, latitudeDegrees);
             final double longitude = copySign(abs(longitudeDegrees) + longitudeDecimalMinutes / 60, longitudeDegrees);
