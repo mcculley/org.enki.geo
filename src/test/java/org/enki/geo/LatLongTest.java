@@ -181,4 +181,13 @@ class LatLongTest {
         ));
     }
 
+    @Test
+    public void testEquals() {
+        final LatLong a = new LatLong(25.250, -80.125);
+        final LatLong b = new LatLong(25.250, -80.125);
+        assertFalse(a.equals(null));
+        assertEquals(a, a);
+        assertEquals(a, b);
+    }
+
 }
