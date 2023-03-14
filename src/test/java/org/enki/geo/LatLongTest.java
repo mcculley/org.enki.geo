@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static systems.uom.common.USCustomary.DEGREE_ANGLE;
@@ -193,6 +194,21 @@ class LatLongTest {
         assertEquals(a, b);
         assertNotEquals(a, c);
         assertNotEquals(a, d);
+    }
+
+    @Test
+    public void testHashCode() {
+        final LatLong a = new LatLong(25.250, -80.125);
+        final LatLong c = new LatLong(25.750, -80.125);
+        final LatLong d = new LatLong(25.250, -80.500);
+        final Set<LatLong> s = Set.of(a, c, d);
+        assertEquals(3, s.size());
+    }
+
+    @Test
+    public void testConstructor() {
+        final LatLong a = new LatLong(25.250, -80.125);
+        assertEquals(a, new LatLong(a));
     }
 
 }
