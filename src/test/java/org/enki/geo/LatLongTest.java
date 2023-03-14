@@ -169,6 +169,8 @@ class LatLongTest {
                 new LatLong(24.752602, -81.882376),
                 new LatLong(26.522385, -81.993888)
         );
+        final Quantity<Length> distance = LatLong.distance(route);
+        assertEquals(676860.54, distance.getValue().doubleValue(), 0.1);
         final LatLong location = new LatLong(25.183, -80.3203);
         final List<LatLong> remainingRoute = location.remainingRoute(route);
         assertEquals(remainingRoute, List.of(
