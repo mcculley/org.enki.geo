@@ -1,6 +1,7 @@
 package org.enki.geo;
 
 import com.google.common.collect.ImmutableList;
+import org.jetbrains.annotations.NotNull;
 import tech.units.indriya.quantity.Quantities;
 
 import javax.measure.Quantity;
@@ -57,7 +58,7 @@ public class LatLong {
      *
      * @param geoURI the GeoURI
      */
-    public LatLong(final URI geoURI) {
+    public LatLong(final @NotNull URI geoURI) {
         if (!geoURI.getScheme().equals("geo")) {
             throw new IllegalArgumentException(
                     String.format("unexpected scheme '%s' in '%s'", geoURI.getScheme(), geoURI));
@@ -82,7 +83,7 @@ public class LatLong {
      *
      * @param other the existing LatLong object
      */
-    public LatLong(final LatLong other) {
+    public LatLong(final @NotNull LatLong other) {
         this(other.latitude, other.longitude);
     }
 
@@ -95,7 +96,7 @@ public class LatLong {
      * @param b the other LatLong coordinate
      * @return distance in meters
      */
-    public Quantity<Length> distanceSquared(final LatLong b) {
+    public @NotNull Quantity<Length> distanceSquared(final @NotNull LatLong b) {
         // FIXME: See org.geotools.geometry.jts.JTS.orthodromicDistance for a more accurate way to calculate distance.
         final double latDistance = toRadians(b.latitude - latitude);
         final double lonDistance = toRadians(b.longitude - longitude);
@@ -111,11 +112,11 @@ public class LatLong {
      * @param b the other LatLong coordinate
      * @return the distance in meters
      */
-    public Quantity<Length> distance(final LatLong b) {
+    public @NotNull Quantity<Length> distance(final @NotNull LatLong b) {
         return Quantities.getQuantity(sqrt(distanceSquared(b).getValue().doubleValue()), METRE);
     }
 
-    public static Quantity<Length> distance(final List<LatLong> route) {
+    public static @NotNull Quantity<Length> distance(final @NotNull List<LatLong> route) {
         Quantity<Length> sum = Quantities.getQuantity(0, METRE);
         for (int i = 1; i < route.size(); i++) {
             sum = sum.add(route.get(i).distance(route.get(i - 1)));
@@ -131,7 +132,7 @@ public class LatLong {
      * @param distance the distance
      * @return the projected location
      */
-    public LatLong plus(final Quantity<Angle> heading, final Quantity<Length> distance) {
+    public @NotNull LatLong plus(final @NotNull Quantity<Angle> heading, final @NotNull Quantity<Length> distance) {
         final double bearingR = heading.to(RADIAN).getValue().doubleValue();
         final double latR = toRadians(latitude);
         final double lonR = toRadians(longitude);
@@ -156,7 +157,7 @@ public class LatLong {
      * @param b the coordinate
      * @return the heading in degrees
      */
-    public Quantity<Angle> heading(final LatLong b) {
+    public @NotNull Quantity<Angle> heading(final @NotNull LatLong b) {
         final double Δlong = toRadians(b.longitude - longitude);
         final double lat1 = toRadians(latitude);
         final double lat2 = toRadians(b.latitude);
@@ -173,7 +174,7 @@ public class LatLong {
      * @param c the end point of the vector ac
      * @return the dot product
      */
-    private static double dotProduct(final LatLong a, final LatLong b, final LatLong c) {
+    private static double dotProduct(final @NotNull LatLong a, final @NotNull LatLong b, final @NotNull LatLong c) {
         // FIXME: This probably breaks around 0º and 180º longitude. Add test cases for that and fix.
         final double abx = b.longitude - a.longitude;
         final double aby = b.latitude - a.latitude;
@@ -190,7 +191,7 @@ public class LatLong {
      * @return The remaining route, which should either be location and the initial route, or location and the remaining
      * points on the route.
      */
-    public List<LatLong> remainingRoute(final List<LatLong> route) {
+    public @NotNull List<LatLong> remainingRoute(final @NotNull List<LatLong> route) {
         if (route.size() < 3) {
             // FIXME: Handle small routes correctly. This assumes that we are somewhere along a route of only two points.
             return List.of(this, route.get(route.size() - 1));
@@ -237,7 +238,7 @@ public class LatLong {
     }
 
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return String.format("%fº, %fº", latitude, longitude);
     }
 
@@ -248,7 +249,7 @@ public class LatLong {
      *
      * @return this location encoded as a geo URI.
      */
-    public URI toGeoURI() {
+    public @NotNull URI toGeoURI() {
         return URI.create(String.format("geo:%f,%f", latitude, longitude));
     }
 
@@ -265,23 +266,23 @@ public class LatLong {
             this.longitudeDecimalMinutes = longitudeDecimalMinutes;
         }
 
-        public DegreesDecimalMinutes(final LatLong c) {
+        public DegreesDecimalMinutes(final @NotNull LatLong c) {
             this((int) c.latitude, (abs(c.latitude) - floor(abs(c.latitude))) * 60.0, (int) c.longitude,
                     (abs(c.longitude) - floor(abs(c.longitude))) * 60.0);
         }
 
-        public String toString() {
+        public @NotNull String toString() {
             return String.format("%dº %.8f', %dº %.8f'", latitudeDegrees, latitudeDecimalMinutes, longitudeDegrees,
                     longitudeDecimalMinutes);
         }
 
-        public String toStringCardinal() {
+        public @NotNull String toStringCardinal() {
             return String.format("%dº %.8f' %c, %dº %.8f' %c", abs(latitudeDegrees), latitudeDecimalMinutes,
                     (latitudeDegrees > 0 ? 'N' : 'S'), abs(longitudeDegrees),
                     longitudeDecimalMinutes, (longitudeDegrees > 0 ? 'E' : 'W'));
         }
 
-        public LatLong getLatLong() {
+        public @NotNull LatLong getLatLong() {
             final double latitude = copySign(abs(latitudeDegrees) + latitudeDecimalMinutes / 60, latitudeDegrees);
             final double longitude = copySign(abs(longitudeDegrees) + longitudeDecimalMinutes / 60, longitudeDegrees);
             return new LatLong(latitude, longitude);
@@ -306,7 +307,7 @@ public class LatLong {
             this.longitudeSeconds = longitudeSeconds;
         }
 
-        public DegreesMinutesSeconds(final LatLong c) {
+        public DegreesMinutesSeconds(final @NotNull LatLong c) {
             final double absoluteLatitude = abs(c.latitude);
             this.latitudeDegrees = (int) c.latitude;
             final double minutesNotTruncatedLatitude = (absoluteLatitude - abs(latitudeDegrees)) * 60;
@@ -319,13 +320,13 @@ public class LatLong {
             this.longitudeSeconds = (minutesNotTruncatedLongitude - longitudeMinutes) * 60;
         }
 
-        public String toString() {
+        public @NotNull String toString() {
             return String.format("%dº %d' %.8f\" %c, %dº %d' %.8f\" %c",
                     abs(latitudeDegrees), latitudeMinutes, latitudeSeconds, (latitudeDegrees > 0 ? 'N' : 'S'),
                     abs(longitudeDegrees), longitudeMinutes, longitudeSeconds, (longitudeDegrees > 0 ? 'E' : 'W'));
         }
 
-        public LatLong getLatLong() {
+        public @NotNull LatLong getLatLong() {
             final double latitude =
                     copySign(abs(latitudeDegrees) + latitudeMinutes / 60.0 + latitudeSeconds / 3600.0, latitudeDegrees);
             final double longitude =
