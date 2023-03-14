@@ -255,7 +255,8 @@ public class LatLong {
 
     @Override
     public @NotNull String toString() {
-        return String.format("%fº, %fº", latitude, longitude);
+        return String.format("%sº, %sº", formatWithoutTrailingZeros(latitude),
+                formatWithoutTrailingZeros(longitude));
     }
 
     // FIXME: Handle altitude in geo URI.

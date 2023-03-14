@@ -238,4 +238,9 @@ class LatLongTest {
         assertEquals(bg, new LatLong(bg).toGeoURI());
     }
 
+    @Test
+    public void testToString(){
+        assertEquals("25.25º, 80.125º", new LatLong(25.25,80.125).toString());
+    }
+
 }
