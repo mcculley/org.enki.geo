@@ -1,4 +1,4 @@
-Some useful utilities for geography and geometry.
+Some utilities for geography and geometry.
 
 [![javadoc](https://javadoc.io/badge2/org.enki/geo/javadoc.svg)](https://javadoc.io/doc/org.enki/geo)
 
