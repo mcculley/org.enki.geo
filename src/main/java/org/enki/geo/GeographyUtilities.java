@@ -9,6 +9,9 @@ import java.util.Objects;
 
 import static systems.uom.common.USCustomary.DEGREE_ANGLE;
 
+/**
+ * Miscellaneous utilities for dealing with geography.
+ */
 public class GeographyUtilities {
 
     private GeographyUtilities() {

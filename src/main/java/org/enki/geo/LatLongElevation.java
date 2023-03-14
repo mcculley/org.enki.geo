@@ -10,6 +10,9 @@ import java.util.Objects;
 
 import static tech.units.indriya.unit.Units.METRE;
 
+/**
+ * A location on Earth that includes an altitude above sea level.
+ */
 public class LatLongElevation extends LatLong {
 
     public final Quantity<Length> elevation;

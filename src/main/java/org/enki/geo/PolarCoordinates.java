@@ -9,6 +9,9 @@ import java.util.function.Function;
 
 import static tech.units.indriya.unit.Units.RADIAN;
 
+/**
+ * A location using polar coordinates.
+ */
 public class PolarCoordinates {
 
     public final double r;

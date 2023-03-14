@@ -29,6 +29,9 @@ import static tech.units.indriya.unit.Units.RADIAN;
 
 // FIXME: This needs verification at 180/-180 boundary (and other boundaries).
 
+/**
+ * A location on Earth expressed as a latitude and longitude.
+ */
 public class LatLong {
 
     public final double latitude; // The latitude in degrees.
