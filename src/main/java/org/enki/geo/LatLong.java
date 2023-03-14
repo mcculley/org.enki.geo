@@ -212,6 +212,9 @@ public class LatLong {
             return List.of(this, route.get(route.size() - 1));
         }
 
+        // Find the dot product of the vector from the closest point to this location and the closest point to the
+        // next point. A positive value means this location is ahead of the closest point along the route and that we
+        // should use the next point.
         final double dotProduct = dotProduct(route.get(closestIndex), route.get(closestIndex + 1), this);
         final int bestIndex = dotProduct < 0 ? closestIndex : closestIndex + 1;
 
