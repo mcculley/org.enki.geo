@@ -264,7 +264,7 @@ public class LatLong {
     }
 
     /**
-     * A representatin of a location as degrees with decimal minutes.
+     * A representation of a location as degrees with decimal minutes.
      */
     public static class DegreesDecimalMinutes {
 
@@ -281,9 +281,9 @@ public class LatLong {
         /**
          * Create a new location from latitude and longitude in decimal degrees.
          *
-         * @param latitudeDegrees the integer component of the latitude, in degrees
-         * @param latitudeDecimalMinutes the fractional decimal component of the latitude
-         * @param longitudeDegrees the integer component of the longitude, in degrees
+         * @param latitudeDegrees         the integer component of the latitude, in degrees
+         * @param latitudeDecimalMinutes  the fractional decimal component of the latitude
+         * @param longitudeDegrees        the integer component of the longitude, in degrees
          * @param longitudeDecimalMinutes the fractional decimal component of the longitude
          */
         public DegreesDecimalMinutes(final int latitudeDegrees, final double latitudeDecimalMinutes,
@@ -333,10 +333,24 @@ public class LatLong {
 
     }
 
+    /**
+     * A representation of a location as degrees, minutes, and decimal seconds.
+     */
     public static class DegreesMinutesSeconds {
 
+        /**
+         * The integer components of the latitude and longitude in degrees.
+         */
         public final int latitudeDegrees, longitudeDegrees;
+
+        /**
+         * The integer components of the minutes of the latitude and longitude.
+         */
         public final int latitudeMinutes, longitudeMinutes;
+
+        /**
+         * The fractional decimal components of the seconds of the latitude and longitude.
+         */
         public final double latitudeSeconds, longitudeSeconds;
 
         public DegreesMinutesSeconds(final int latitudeDegrees, final int latitudeMinutes, final double latitudeSeconds,
@@ -350,6 +364,11 @@ public class LatLong {
             this.longitudeSeconds = longitudeSeconds;
         }
 
+        /**
+         * Create a new location from a <code>LatLong</code> location
+         *
+         * @param c the location
+         */
         public DegreesMinutesSeconds(final @NotNull LatLong c) {
             final double absoluteLatitude = abs(c.latitude);
             this.latitudeDegrees = (int) c.latitude;
@@ -369,6 +388,11 @@ public class LatLong {
                     abs(longitudeDegrees), longitudeMinutes, longitudeSeconds, (longitudeDegrees > 0 ? 'E' : 'W'));
         }
 
+        /**
+         * Gets the location as a <code>LatLong</code>
+         *
+         * @return the location
+         */
         public @NotNull LatLong getLatLong() {
             final double latitude =
                     copySign(abs(latitudeDegrees) + latitudeMinutes / 60.0 + latitudeSeconds / 3600.0, latitudeDegrees);
