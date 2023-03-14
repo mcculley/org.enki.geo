@@ -7,6 +7,7 @@ import javax.measure.quantity.Length;
 
 import org.junit.jupiter.api.Test;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -209,6 +210,21 @@ class LatLongTest {
     public void testConstructor() {
         final LatLong a = new LatLong(25.250, -80.125);
         assertEquals(a, new LatLong(a));
+        assertThrows(IllegalArgumentException.class, () -> new LatLong(91, 0));
+        assertThrows(IllegalArgumentException.class, () -> new LatLong(-91, 0));
+        assertThrows(IllegalArgumentException.class, () -> new LatLong(0, 181));
+        assertThrows(IllegalArgumentException.class, () -> new LatLong(0, -181));
+    }
+
+    @Test
+    public void testGeoURI() {
+        final LatLong a = new LatLong(25.250, -80.125);
+        assertEquals(a, new LatLong(URI.create("geo:25.250,-80.125")));
+        assertThrows(IllegalArgumentException.class, () -> new LatLong(URI.create("geography:25.250,-80.125")));
+        assertThrows(IllegalArgumentException.class, () -> new LatLong(URI.create("geo:91,0")));
+        assertThrows(IllegalArgumentException.class, () -> new LatLong(URI.create("geo:-91,0")));
+        assertThrows(IllegalArgumentException.class, () -> new LatLong(URI.create("geo:0,181")));
+        assertThrows(IllegalArgumentException.class, () -> new LatLong(URI.create("geo:0,-181")));
     }
 
 }
