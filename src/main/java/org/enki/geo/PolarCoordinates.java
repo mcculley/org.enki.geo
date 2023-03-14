@@ -14,8 +14,15 @@ import static tech.units.indriya.unit.Units.RADIAN;
  */
 public class PolarCoordinates {
 
+    /**
+     * The distance from the center.
+     */
     public final double r;
-    public final double theta; // angle in radians
+
+    /**
+     * The angle in radians.
+     */
+    public final double theta;
 
     /**
      * Create new PolarCoordinate.

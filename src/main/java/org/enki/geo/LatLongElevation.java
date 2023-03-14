@@ -15,6 +15,9 @@ import static tech.units.indriya.unit.Units.METRE;
  */
 public class LatLongElevation extends LatLong {
 
+    /**
+     * The elevation above sea level.
+     */
     public final Quantity<Length> elevation;
 
     /**

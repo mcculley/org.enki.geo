@@ -34,8 +34,15 @@ import static tech.units.indriya.unit.Units.RADIAN;
  */
 public class LatLong {
 
-    public final double latitude; // The latitude in degrees.
-    public final double longitude; // The longitude in degrees.
+    /**
+     * The latitude in degrees.
+     */
+    public final double latitude;
+
+    /**
+     * The longitude in degrees.
+     */
+    public final double longitude;
 
     /**
      * Construct a LatLong using a supplied latitude and longitude in degrees.

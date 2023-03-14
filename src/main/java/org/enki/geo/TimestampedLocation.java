@@ -10,6 +10,9 @@ import java.util.Objects;
  */
 public class TimestampedLocation extends LatLong {
 
+    /**
+     * The timestamp as an <code>Instant</code>.
+     */
     public final Instant timestamp;
 
     /**
