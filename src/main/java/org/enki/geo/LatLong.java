@@ -126,6 +126,12 @@ public class LatLong {
         return Quantities.getQuantity(sqrt(distanceSquared(b).getValue().doubleValue()), METRE);
     }
 
+    /**
+     * Compute the distance of a route.
+     *
+     * @param route the route as a <code>List</code> of locations
+     * @return the distance, in meters
+     */
     public static @NotNull Quantity<Length> distance(final @NotNull List<LatLong> route) {
         Quantity<Length> sum = Quantities.getQuantity(0, METRE);
         for (int i = 1; i < route.size(); i++) {
