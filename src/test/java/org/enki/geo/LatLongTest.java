@@ -56,6 +56,13 @@ class LatLongTest {
     void conversion1() {
         final LatLong l1 = new LatLong(27.50, -82.75);
         final LatLong.DegreesDecimalMinutes lddm1 = new LatLong.DegreesDecimalMinutes(l1);
+        assertNotEquals(lddm1, null);
+        assertNotEquals(lddm1, "not a location");
+        assertEquals(lddm1, lddm1);
+
+        // test hashCode()
+        assertEquals(8, Set.of(lddm1, "2", "3", "4", "5", "6", "7", "8").size());
+
         assertEquals(27, lddm1.latitudeDegrees);
         assertEquals(-82, lddm1.longitudeDegrees);
         assertEquals(30, lddm1.latitudeDecimalMinutes);
@@ -63,6 +70,16 @@ class LatLongTest {
         assertEquals("27º 30', -82º 45'", lddm1.toString());
         assertEquals("27º 30' N, 82º 45' W", lddm1.toStringCardinal());
         assertEquals(l1, lddm1.getLatLong());
+        final LatLong.DegreesDecimalMinutes lddm2 = new LatLong.DegreesDecimalMinutes(-27, 30, -82, 45);
+        assertNotEquals(lddm1, lddm2);
+        final LatLong.DegreesDecimalMinutes lddm3 = new LatLong.DegreesDecimalMinutes(27, 30, 82, 45);
+        assertNotEquals(lddm1, lddm3);
+        final LatLong.DegreesDecimalMinutes lddm4 = new LatLong.DegreesDecimalMinutes(27, 12, -82, 45);
+        assertNotEquals(lddm1, lddm4);
+        final LatLong.DegreesDecimalMinutes lddm5 = new LatLong.DegreesDecimalMinutes(27, 30, -82, 12);
+        assertNotEquals(lddm1, lddm5);
+        final LatLong.DegreesDecimalMinutes lddm6 = new LatLong.DegreesDecimalMinutes(27, 30, -82, 13);
+        assertNotEquals(lddm5, lddm6);
         final LatLong.DegreesMinutesSeconds ldms1 = new LatLong.DegreesMinutesSeconds(l1);
         assertEquals(27, ldms1.latitudeDegrees);
         assertEquals(-82, ldms1.longitudeDegrees);
@@ -91,6 +108,8 @@ class LatLongTest {
         assertNotEquals(ldms2, ldms8);
         final LatLong.DegreesMinutesSeconds ldms9 = new LatLong.DegreesMinutesSeconds(27, 30, 30, -81, 45, 0);
         assertNotEquals(ldms2, ldms9);
+
+        // test hashCode()
         assertEquals(8, Set.of(ldms1, ldms3, ldms4, ldms5, ldms6, ldms7, ldms8, ldms9).size());
     }
 

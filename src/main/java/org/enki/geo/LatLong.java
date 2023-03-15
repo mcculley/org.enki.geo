@@ -345,6 +345,21 @@ public class LatLong {
             return new LatLong(latitude, longitude);
         }
 
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            final DegreesDecimalMinutes that = (DegreesDecimalMinutes) o;
+            return latitudeDegrees == that.latitudeDegrees && longitudeDegrees == that.longitudeDegrees &&
+                    Double.compare(that.latitudeDecimalMinutes, latitudeDecimalMinutes) == 0 &&
+                    Double.compare(that.longitudeDecimalMinutes, longitudeDecimalMinutes) == 0;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(latitudeDegrees, longitudeDegrees, latitudeDecimalMinutes, longitudeDecimalMinutes);
+        }
+
     }
 
     /**
