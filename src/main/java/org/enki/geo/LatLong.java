@@ -208,9 +208,8 @@ public class LatLong {
      * points on the route.
      */
     public @NotNull List<LatLong> remainingRoute(final @NotNull List<LatLong> route) {
-        if (route.size() < 3) {
-            // FIXME: Handle small routes correctly. This assumes that we are somewhere along a route of only two points.
-            return List.of(this, route.get(route.size() - 1));
+        if (route.isEmpty()) {
+            throw new IllegalArgumentException("an empty route is not valid");
         }
 
         final int n = route.size();

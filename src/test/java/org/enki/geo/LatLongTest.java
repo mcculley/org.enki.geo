@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -250,6 +251,13 @@ class LatLongTest {
         final LatLong shortRemainingLocation = new LatLong(26.5, -81.98);
         final List<LatLong> shortRemainingRoute = shortRemainingLocation.remainingRoute(route);
         assertEquals(2, shortRemainingRoute.size());
+
+        assertThrows(IllegalArgumentException.class,
+                () -> shortRemainingLocation.remainingRoute(Collections.emptyList()));
+
+        assertEquals(2, shortRemainingLocation.remainingRoute(List.of(new LatLong(26.522385, -81.993888))).size());
+        assertEquals(3, new LatLong(24.74, -81.87).remainingRoute(
+                List.of(new LatLong(24.752602, -81.882376), new LatLong(26.522385, -81.993888))).size());
     }
 
     @Test
