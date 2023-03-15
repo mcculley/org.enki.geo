@@ -262,8 +262,8 @@ class LatLongTest {
     }
 
     @Test
-    public void testToString(){
-        assertEquals("25.25º, 80.125º", new LatLong(25.25,80.125).toString());
+    public void testToString() {
+        assertEquals("25.25º, 80.125º", new LatLong(25.25, 80.125).toString());
     }
 
 }
