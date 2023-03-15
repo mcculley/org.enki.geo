@@ -245,6 +245,11 @@ class LatLongTest {
                 new LatLong(24.752602, -81.882376),
                 new LatLong(26.522385, -81.993888)
         ));
+
+        // Exercise the code path that uses only the final point in the supplied route.
+        final LatLong shortRemainingLocation = new LatLong(26.5, -81.98);
+        final List<LatLong> shortRemainingRoute = shortRemainingLocation.remainingRoute(route);
+        assertEquals(2, shortRemainingRoute.size());
     }
 
     @Test
