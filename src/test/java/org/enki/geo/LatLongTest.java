@@ -83,7 +83,7 @@ class LatLongTest {
         assertNotEquals(ldms2, ldms4);
         final LatLong.DegreesMinutesSeconds ldms5 = new LatLong.DegreesMinutesSeconds(27, 0, 30, -82, 45, 0);
         assertNotEquals(ldms2, ldms5);
-        final LatLong.DegreesMinutesSeconds ldms6 = new LatLong.DegreesMinutesSeconds(27, 0, 30, -82, 45, 0);
+        final LatLong.DegreesMinutesSeconds ldms6 = new LatLong.DegreesMinutesSeconds(27, 2, 30, -82, 45, 0);
         assertNotEquals(ldms2, ldms6);
         final LatLong.DegreesMinutesSeconds ldms7 = new LatLong.DegreesMinutesSeconds(27, 30, 30, -82, 15, 0);
         assertNotEquals(ldms2, ldms7);
@@ -91,6 +91,7 @@ class LatLongTest {
         assertNotEquals(ldms2, ldms8);
         final LatLong.DegreesMinutesSeconds ldms9 = new LatLong.DegreesMinutesSeconds(27, 30, 30, -81, 45, 0);
         assertNotEquals(ldms2, ldms9);
+        assertEquals(8, Set.of(ldms1, ldms3, ldms4, ldms5, ldms6, ldms7, ldms8, ldms9).size());
     }
 
     @Test
