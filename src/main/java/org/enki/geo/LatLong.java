@@ -428,6 +428,23 @@ public class LatLong {
             return new LatLong(latitude, longitude);
         }
 
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            final DegreesMinutesSeconds that = (DegreesMinutesSeconds) o;
+            return latitudeDegrees == that.latitudeDegrees && longitudeDegrees == that.longitudeDegrees &&
+                    latitudeMinutes == that.latitudeMinutes && longitudeMinutes == that.longitudeMinutes &&
+                    Double.compare(that.latitudeSeconds, latitudeSeconds) == 0 &&
+                    Double.compare(that.longitudeSeconds, longitudeSeconds) == 0;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(latitudeDegrees, longitudeDegrees, latitudeMinutes, longitudeMinutes, latitudeSeconds,
+                    longitudeSeconds);
+        }
+
     }
 
 }

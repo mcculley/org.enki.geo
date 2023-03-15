@@ -72,6 +72,25 @@ class LatLongTest {
         assertEquals(0, ldms1.longitudeSeconds);
         assertEquals("27º 30' 0\" N, 82º 45' 0\" W", ldms1.toString());
         assertEquals(l1, ldms1.getLatLong());
+        final LatLong.DegreesMinutesSeconds ldms2 = new LatLong.DegreesMinutesSeconds(27, 30, 0, -82, 45, 0);
+        assertEquals(ldms1, ldms2);
+        assertEquals(ldms1, ldms1);
+        assertNotEquals(ldms1, null);
+        assertNotEquals(ldms1, "not a location");
+        final LatLong.DegreesMinutesSeconds ldms3 = new LatLong.DegreesMinutesSeconds(27, 30, 30, -82, 45, 0);
+        assertNotEquals(ldms2, ldms3);
+        final LatLong.DegreesMinutesSeconds ldms4 = new LatLong.DegreesMinutesSeconds(27, 30, 0, -82, 45, 30);
+        assertNotEquals(ldms2, ldms4);
+        final LatLong.DegreesMinutesSeconds ldms5 = new LatLong.DegreesMinutesSeconds(27, 0, 30, -82, 45, 0);
+        assertNotEquals(ldms2, ldms5);
+        final LatLong.DegreesMinutesSeconds ldms6 = new LatLong.DegreesMinutesSeconds(27, 0, 30, -82, 45, 0);
+        assertNotEquals(ldms2, ldms6);
+        final LatLong.DegreesMinutesSeconds ldms7 = new LatLong.DegreesMinutesSeconds(27, 30, 30, -82, 15, 0);
+        assertNotEquals(ldms2, ldms7);
+        final LatLong.DegreesMinutesSeconds ldms8 = new LatLong.DegreesMinutesSeconds(15, 30, 0, -82, 45, 0);
+        assertNotEquals(ldms2, ldms8);
+        final LatLong.DegreesMinutesSeconds ldms9 = new LatLong.DegreesMinutesSeconds(27, 30, 30, -81, 45, 0);
+        assertNotEquals(ldms2, ldms9);
     }
 
     @Test
