@@ -348,7 +348,7 @@ public class LatLong {
     }
 
     /**
-     * A representation of a location as degrees, minutes, and decimal seconds.
+     * A representation of a location as degrees, minutes, and decimal seconds (sexagesimal).
      */
     public static class DegreesMinutesSeconds {
 
