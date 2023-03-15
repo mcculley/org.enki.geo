@@ -317,8 +317,9 @@ public class LatLong {
         }
 
         public @NotNull String toString() {
-            return String.format("%dº %.8f', %dº %.8f'", latitudeDegrees, latitudeDecimalMinutes, longitudeDegrees,
-                    longitudeDecimalMinutes);
+            return String.format("%dº %s', %dº %s'", latitudeDegrees,
+                    formatWithoutTrailingZeros(latitudeDecimalMinutes), longitudeDegrees,
+                    formatWithoutTrailingZeros(longitudeDecimalMinutes));
         }
 
         /**
@@ -327,9 +328,10 @@ public class LatLong {
          * @return the string representation
          */
         public @NotNull String toStringCardinal() {
-            return String.format("%dº %.8f' %c, %dº %.8f' %c", abs(latitudeDegrees), latitudeDecimalMinutes,
-                    (latitudeDegrees > 0 ? 'N' : 'S'), abs(longitudeDegrees),
-                    longitudeDecimalMinutes, (longitudeDegrees > 0 ? 'E' : 'W'));
+            return String.format("%dº %s' %c, %dº %s' %c", abs(latitudeDegrees),
+                    formatWithoutTrailingZeros(latitudeDecimalMinutes), (latitudeDegrees > 0 ? 'N' : 'S'),
+                    abs(longitudeDegrees), formatWithoutTrailingZeros(longitudeDecimalMinutes),
+                    (longitudeDegrees > 0 ? 'E' : 'W'));
         }
 
         /**
@@ -405,9 +407,11 @@ public class LatLong {
         }
 
         public @NotNull String toString() {
-            return String.format("%dº %d' %.8f\" %c, %dº %d' %.8f\" %c",
-                    abs(latitudeDegrees), latitudeMinutes, latitudeSeconds, (latitudeDegrees > 0 ? 'N' : 'S'),
-                    abs(longitudeDegrees), longitudeMinutes, longitudeSeconds, (longitudeDegrees > 0 ? 'E' : 'W'));
+            return String.format("%dº %d' %s\" %c, %dº %d' %s\" %c",
+                    abs(latitudeDegrees), latitudeMinutes, formatWithoutTrailingZeros(latitudeSeconds),
+                    (latitudeDegrees > 0 ? 'N' : 'S'),
+                    abs(longitudeDegrees), longitudeMinutes, formatWithoutTrailingZeros(longitudeSeconds),
+                    (longitudeDegrees > 0 ? 'E' : 'W'));
         }
 
         /**

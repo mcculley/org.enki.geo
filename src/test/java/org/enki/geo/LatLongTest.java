@@ -49,7 +49,7 @@ class LatLongTest {
     @Test
     void conversion0() {
         final LatLong equator1 = new LatLong(0, 0);
-        assertEquals("0º 0.00000000', 0º 0.00000000'", new LatLong.DegreesDecimalMinutes(equator1).toString());
+        assertEquals("0º 0', 0º 0'", new LatLong.DegreesDecimalMinutes(equator1).toString());
     }
 
     @Test
@@ -60,7 +60,7 @@ class LatLongTest {
         assertEquals(-82, lddm1.longitudeDegrees);
         assertEquals(30, lddm1.latitudeDecimalMinutes);
         assertEquals(45, lddm1.longitudeDecimalMinutes);
-        assertEquals("27º 30.00000000', -82º 45.00000000'", lddm1.toString());
+        assertEquals("27º 30', -82º 45'", lddm1.toString());
         assertEquals(l1, lddm1.getLatLong());
         final LatLong.DegreesMinutesSeconds ldms1 = new LatLong.DegreesMinutesSeconds(l1);
         assertEquals(27, ldms1.latitudeDegrees);
@@ -69,7 +69,7 @@ class LatLongTest {
         assertEquals(45, ldms1.longitudeMinutes);
         assertEquals(0, ldms1.latitudeSeconds);
         assertEquals(0, ldms1.longitudeSeconds);
-        assertEquals("27º 30' 0.00000000\" N, 82º 45' 0.00000000\" W", ldms1.toString());
+        assertEquals("27º 30' 0\" N, 82º 45' 0\" W", ldms1.toString());
         assertEquals(l1, ldms1.getLatLong());
     }
 
@@ -81,7 +81,7 @@ class LatLongTest {
         assertEquals(-82, lddm2.longitudeDegrees);
         assertEquals(37.5, lddm2.latitudeDecimalMinutes);
         assertEquals(52.5, lddm2.longitudeDecimalMinutes);
-        assertEquals("27º 37.50000000', -82º 52.50000000'", lddm2.toString());
+        assertEquals("27º 37.5', -82º 52.5'", lddm2.toString());
         assertEquals(l2, lddm2.getLatLong());
         final LatLong.DegreesMinutesSeconds ldms2 = new LatLong.DegreesMinutesSeconds(l2);
         assertEquals(27, ldms2.latitudeDegrees);
@@ -90,7 +90,7 @@ class LatLongTest {
         assertEquals(52, ldms2.longitudeMinutes);
         assertEquals(30, ldms2.latitudeSeconds);
         assertEquals(30, ldms2.longitudeSeconds);
-        assertEquals("27º 37' 30.00000000\" N, 82º 52' 30.00000000\" W", ldms2.toString());
+        assertEquals("27º 37' 30\" N, 82º 52' 30\" W", ldms2.toString());
         assertEquals(l2, ldms2.getLatLong());
     }
 
