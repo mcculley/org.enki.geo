@@ -61,6 +61,7 @@ class LatLongTest {
         assertEquals(30, lddm1.latitudeDecimalMinutes);
         assertEquals(45, lddm1.longitudeDecimalMinutes);
         assertEquals("27º 30', -82º 45'", lddm1.toString());
+        assertEquals("27º 30' N, 82º 45' W", lddm1.toStringCardinal());
         assertEquals(l1, lddm1.getLatLong());
         final LatLong.DegreesMinutesSeconds ldms1 = new LatLong.DegreesMinutesSeconds(l1);
         assertEquals(27, ldms1.latitudeDegrees);
@@ -92,6 +93,28 @@ class LatLongTest {
         assertEquals(30, ldms2.longitudeSeconds);
         assertEquals("27º 37' 30\" N, 82º 52' 30\" W", ldms2.toString());
         assertEquals(l2, ldms2.getLatLong());
+    }
+
+    @Test
+    void conversion3() {
+        final LatLong l1 = new LatLong(-27.50, 82.75);
+        final LatLong.DegreesDecimalMinutes lddm1 = new LatLong.DegreesDecimalMinutes(l1);
+        assertEquals(-27, lddm1.latitudeDegrees);
+        assertEquals(82, lddm1.longitudeDegrees);
+        assertEquals(30, lddm1.latitudeDecimalMinutes);
+        assertEquals(45, lddm1.longitudeDecimalMinutes);
+        assertEquals("-27º 30', 82º 45'", lddm1.toString());
+        assertEquals("27º 30' S, 82º 45' E", lddm1.toStringCardinal());
+        assertEquals(l1, lddm1.getLatLong());
+        final LatLong.DegreesMinutesSeconds ldms1 = new LatLong.DegreesMinutesSeconds(l1);
+        assertEquals(-27, ldms1.latitudeDegrees);
+        assertEquals(82, ldms1.longitudeDegrees);
+        assertEquals(30, ldms1.latitudeMinutes);
+        assertEquals(45, ldms1.longitudeMinutes);
+        assertEquals(0, ldms1.latitudeSeconds);
+        assertEquals(0, ldms1.longitudeSeconds);
+        assertEquals("27º 30' 0\" S, 82º 45' 0\" E", ldms1.toString());
+        assertEquals(l1, ldms1.getLatLong());
     }
 
     private static <T> List<T> concat(final T a, final List<T> b) {
