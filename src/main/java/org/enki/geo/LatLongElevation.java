@@ -52,15 +52,17 @@ public class LatLongElevation extends LatLong {
      */
     @Override
     public @NotNull Quantity<Length> distanceSquared(final @NotNull LatLong b) {
-        if (!(b instanceof LatLongElevation)) {
-            return super.distanceSquared(b);
+        final LatLongElevation other;
+        if (b instanceof LatLongElevation) {
+            other = (LatLongElevation) b;
         } else {
-            final LatLongElevation eb = (LatLongElevation) b;
-            final Quantity<Length> elevationDelta = eb.elevation.subtract(elevation);
-            return Quantities
-                    .getQuantity(super.distanceSquared(b).getValue().doubleValue() +
-                            Math.pow(elevationDelta.getValue().doubleValue(), 2), METRE);
+            other = new LatLongElevation(b, Quantities.getQuantity(0, METRE));
         }
+
+        final Quantity<Length> elevationDelta = other.elevation.subtract(elevation);
+        return Quantities
+                .getQuantity(super.distanceSquared(b).getValue().doubleValue() +
+                        Math.pow(elevationDelta.getValue().doubleValue(), 2), METRE);
     }
 
     /**
