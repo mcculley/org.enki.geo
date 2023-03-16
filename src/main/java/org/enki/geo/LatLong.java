@@ -349,7 +349,8 @@ public class LatLong {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             final DegreesDecimalMinutes that = (DegreesDecimalMinutes) o;
-            return latitudeDegrees == that.latitudeDegrees && longitudeDegrees == that.longitudeDegrees &&
+            return latitudeDegrees == that.latitudeDegrees &&
+                    longitudeDegrees == that.longitudeDegrees &&
                     Double.compare(that.latitudeDecimalMinutes, latitudeDecimalMinutes) == 0 &&
                     Double.compare(that.longitudeDecimalMinutes, longitudeDecimalMinutes) == 0;
         }
@@ -447,8 +448,10 @@ public class LatLong {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             final DegreesMinutesSeconds that = (DegreesMinutesSeconds) o;
-            return latitudeDegrees == that.latitudeDegrees && longitudeDegrees == that.longitudeDegrees &&
-                    latitudeMinutes == that.latitudeMinutes && longitudeMinutes == that.longitudeMinutes &&
+            return latitudeDegrees == that.latitudeDegrees &&
+                    longitudeDegrees == that.longitudeDegrees &&
+                    latitudeMinutes == that.latitudeMinutes &&
+                    longitudeMinutes == that.longitudeMinutes &&
                     Double.compare(that.latitudeSeconds, latitudeSeconds) == 0 &&
                     Double.compare(that.longitudeSeconds, longitudeSeconds) == 0;
         }
