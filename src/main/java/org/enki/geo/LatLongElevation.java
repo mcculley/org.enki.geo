@@ -68,7 +68,7 @@ public class LatLongElevation extends LatLong {
     /**
      * Compute distance in meters between this coordinate and another.
      *
-     * @param b the other LatLong coordinate
+     * @param b the other LatLongElevation coordinate
      * @return the distance in meters
      */
     public @NotNull Quantity<Length> distance(final @NotNull LatLongElevation b) {
@@ -90,7 +90,7 @@ public class LatLongElevation extends LatLong {
     }
 
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return super.toString() + ", " + formatWithoutTrailingZeros(elevation.getValue().doubleValue()) + "m";
     }
 

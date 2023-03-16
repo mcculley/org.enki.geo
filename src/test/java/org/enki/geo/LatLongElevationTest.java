@@ -18,7 +18,9 @@ public class LatLongElevationTest {
         final LatLongElevation l1 = new LatLongElevation(50, 20, Quantities.getQuantity(0, METRE));
         final LatLongElevation l2 = new LatLongElevation(new LatLong(50, 20), Quantities.getQuantity(100, METRE));
         assertEquals(100, l1.distance(l2).getValue().doubleValue());
-        assertEquals(200, LatLong.distance(List.of(l1,l2,l1)).getValue().doubleValue());
+
+        assertEquals(200, LatLong.distance(List.of(l1, l2, l1)).getValue().doubleValue());
+        assertEquals(200, LatLong.distance(List.of(l1, l2, new LatLong(50, 20))).getValue().doubleValue());
     }
 
     @Test
