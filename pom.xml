@@ -8,9 +8,9 @@
     <artifactId>geo</artifactId>
     <version>0.0.68</version>
 
-    <name>EnkiCore</name>
+    <name>org.enki.geo</name>
     <description>Some handy geo utilities.</description>
-    <url>https://github.com/mcculley/EnkiCore</url>
+    <url>https://github.com/mcculley/org.enki.geo</url>
 
     <licenses>
         <license>
@@ -20,9 +20,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git://github.com/mcculley/EnkiCore.git</connection>
-        <developerConnection>scm:git:ssh://github.com:mcculley/EnkiCore.git</developerConnection>
-        <url>http://github.com/mcculley/EnkiCore/tree/master</url>
+        <connection>scm:git:git://github.com/mcculley/org.enki.geo.git</connection>
+        <developerConnection>scm:git:ssh://github.com:mcculley/org.enki.geo.git</developerConnection>
+        <url>http://github.com/mcculley/org.enki.geo/tree/master</url>
     </scm>
 
     <developers>
