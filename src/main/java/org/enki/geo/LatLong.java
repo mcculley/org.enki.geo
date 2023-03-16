@@ -258,22 +258,11 @@ public class LatLong {
 
     @Override
     public @NotNull String toString() {
-        return String.format("%sº, %sº", formatWithoutTrailingZeros(latitude),
-                formatWithoutTrailingZeros(longitude));
+        return String.format("%sº, %sº", GeographyUtilities.formatWithoutTrailingZeros(latitude),
+                GeographyUtilities.formatWithoutTrailingZeros(longitude));
     }
 
     // FIXME: Handle altitude in geo URI.
-
-    /**
-     * Given a floating point number, render it into a String with no trailing zeros. (e.g. 25.0 renders as "25" and
-     * 25.050 renders as "25.05").
-     *
-     * @param x the number to render
-     * @return a String with no trailing zeros or decimal point if there are no fractional digits
-     */
-    protected static String formatWithoutTrailingZeros(final double x) {
-        return Double.toString(x).replaceAll("\\.?0*$", "");
-    }
 
     /**
      * Convert this location to a geo URI (https://datatracker.ietf.org/doc/html/rfc5870).
@@ -281,8 +270,8 @@ public class LatLong {
      * @return this location encoded as a geo URI.
      */
     public @NotNull URI toGeoURI() {
-        return URI.create(String.format("geo:%s,%s", formatWithoutTrailingZeros(latitude),
-                formatWithoutTrailingZeros(longitude)));
+        return URI.create(String.format("geo:%s,%s", GeographyUtilities.formatWithoutTrailingZeros(latitude),
+                GeographyUtilities.formatWithoutTrailingZeros(longitude)));
     }
 
     /**
@@ -328,8 +317,8 @@ public class LatLong {
 
         public @NotNull String toString() {
             return String.format("%dº %s', %dº %s'", latitudeDegrees,
-                    formatWithoutTrailingZeros(latitudeDecimalMinutes), longitudeDegrees,
-                    formatWithoutTrailingZeros(longitudeDecimalMinutes));
+                    GeographyUtilities.formatWithoutTrailingZeros(latitudeDecimalMinutes), longitudeDegrees,
+                    GeographyUtilities.formatWithoutTrailingZeros(longitudeDecimalMinutes));
         }
 
         /**
@@ -339,8 +328,9 @@ public class LatLong {
          */
         public @NotNull String toStringCardinal() {
             return String.format("%dº %s' %c, %dº %s' %c", abs(latitudeDegrees),
-                    formatWithoutTrailingZeros(latitudeDecimalMinutes), (latitudeDegrees > 0 ? 'N' : 'S'),
-                    abs(longitudeDegrees), formatWithoutTrailingZeros(longitudeDecimalMinutes),
+                    GeographyUtilities.formatWithoutTrailingZeros(latitudeDecimalMinutes),
+                    (latitudeDegrees > 0 ? 'N' : 'S'),
+                    abs(longitudeDegrees), GeographyUtilities.formatWithoutTrailingZeros(longitudeDecimalMinutes),
                     (longitudeDegrees > 0 ? 'E' : 'W'));
         }
 
@@ -434,9 +424,11 @@ public class LatLong {
 
         public @NotNull String toString() {
             return String.format("%dº %d' %s\" %c, %dº %d' %s\" %c",
-                    abs(latitudeDegrees), latitudeMinutes, formatWithoutTrailingZeros(latitudeSeconds),
+                    abs(latitudeDegrees), latitudeMinutes,
+                    GeographyUtilities.formatWithoutTrailingZeros(latitudeSeconds),
                     (latitudeDegrees > 0 ? 'N' : 'S'),
-                    abs(longitudeDegrees), longitudeMinutes, formatWithoutTrailingZeros(longitudeSeconds),
+                    abs(longitudeDegrees), longitudeMinutes,
+                    GeographyUtilities.formatWithoutTrailingZeros(longitudeSeconds),
                     (longitudeDegrees > 0 ? 'E' : 'W'));
         }
 

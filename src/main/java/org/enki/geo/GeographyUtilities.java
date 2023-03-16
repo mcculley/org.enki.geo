@@ -44,4 +44,15 @@ public class GeographyUtilities {
         return directionName(d.to(DEGREE_ANGLE).getValue().doubleValue());
     }
 
+    /**
+     * Given a floating point number, render it into a String with no trailing zeros. (e.g. 25.0 renders as "25" and
+     * 25.050 renders as "25.05").
+     *
+     * @param x the number to render
+     * @return a String with no trailing zeros or decimal point if there are no fractional digits
+     */
+    public static String formatWithoutTrailingZeros(final double x) {
+        return Double.toString(x).replaceAll("\\.?0*$", "");
+    }
+
 }

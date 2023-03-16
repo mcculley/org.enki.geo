@@ -63,7 +63,7 @@ public class PolarCoordinates {
 
     @Override
     public @NotNull String toString() {
-        return "PolarCoordinate{r=" + r + ", theta=" + theta + '}';
+        return "(" + GeographyUtilities.formatWithoutTrailingZeros(r) + ", " + GeographyUtilities.formatWithoutTrailingZeros(theta) + "º)";
     }
 
 }

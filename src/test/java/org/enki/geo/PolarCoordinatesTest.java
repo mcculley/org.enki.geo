@@ -16,6 +16,7 @@ public class PolarCoordinatesTest {
         final Point2D.Double p = c.toCartesian();
         assertEquals(1, p.x);
         assertEquals(0, p.y);
+        assertEquals("(1, 0º)", c.toString());
     }
 
 }

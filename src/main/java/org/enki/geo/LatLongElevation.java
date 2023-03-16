@@ -89,12 +89,14 @@ public class LatLongElevation extends LatLong {
 
     @Override
     public @NotNull String toString() {
-        return super.toString() + ", " + formatWithoutTrailingZeros(elevation.getValue().doubleValue()) + "m";
+        return super.toString() + ", " +
+                GeographyUtilities.formatWithoutTrailingZeros(elevation.getValue().doubleValue()) + "m";
     }
 
     @Override
     public @NotNull URI toGeoURI() {
-        return URI.create(super.toGeoURI() + "," + formatWithoutTrailingZeros(elevation.getValue().doubleValue()));
+        return URI.create(super.toGeoURI() + "," +
+                GeographyUtilities.formatWithoutTrailingZeros(elevation.getValue().doubleValue()));
     }
 
 }
