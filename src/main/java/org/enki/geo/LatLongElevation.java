@@ -6,6 +6,7 @@ import tech.units.indriya.quantity.Quantities;
 import javax.measure.Quantity;
 import javax.measure.quantity.Length;
 
+import java.net.URI;
 import java.util.Objects;
 
 import static tech.units.indriya.unit.Units.METRE;
@@ -83,6 +84,11 @@ public class LatLongElevation extends LatLong {
     @Override
     public String toString() {
         return super.toString() + ", " + formatWithoutTrailingZeros(elevation.getValue().doubleValue()) + "m";
+    }
+
+    @Override
+    public @NotNull URI toGeoURI() {
+        return URI.create(super.toGeoURI() + "," + formatWithoutTrailingZeros(elevation.getValue().doubleValue()));
     }
 
 }

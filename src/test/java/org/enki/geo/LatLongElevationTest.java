@@ -3,6 +3,7 @@ package org.enki.geo;
 import org.junit.jupiter.api.Test;
 import tech.units.indriya.quantity.Quantities;
 
+import java.net.URI;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,7 +28,7 @@ public class LatLongElevationTest {
         assertNotEquals(l1, null);
         assertNotEquals(l1, "not a location");
         assertEquals(l1, l1);
-        assertNotEquals(l1,l3);
+        assertNotEquals(l1, l3);
     }
 
     @Test
@@ -39,7 +40,13 @@ public class LatLongElevationTest {
     @Test
     public void testToString() {
         final LatLongElevation l1 = new LatLongElevation(50, 20, Quantities.getQuantity(0, METRE));
-        assertEquals("50º, 20º, 0m",l1.toString());
+        assertEquals("50º, 20º, 0m", l1.toString());
+    }
+
+    @Test
+    public void testGeoURI() {
+        final URI ag = URI.create("geo:25.25,-80.125,50");
+        assertEquals(ag, new LatLongElevation(25.25, -80.125, Quantities.getQuantity(50, METRE)).toGeoURI());
     }
 
 }
