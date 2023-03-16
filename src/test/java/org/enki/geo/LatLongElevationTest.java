@@ -23,6 +23,7 @@ public class LatLongElevationTest {
         assertEquals(200, LatLong.distance(List.of(l1, l2, l1)).getValue().doubleValue());
         assertThrows(IllegalArgumentException.class,
                 () -> LatLong.distance(List.of(l1, l2, new LatLong(50, 20))).getValue().doubleValue());
+        assertThrows(IllegalArgumentException.class, () -> l1.distance(new LatLong(50, 20)));
     }
 
     @Test
