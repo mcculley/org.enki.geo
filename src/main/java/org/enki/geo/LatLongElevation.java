@@ -21,6 +21,17 @@ public class LatLongElevation extends LatLong {
     public final Quantity<Length> elevation;
 
     /**
+     * Construct a LatLongElevation using a supplied LatLong and an elevation.
+     *
+     * @param location  the 2D location
+     * @param elevation elevation
+     */
+    public LatLongElevation(final @NotNull LatLong location, final @NotNull Quantity<Length> elevation) {
+        super(location);
+        this.elevation = elevation;
+    }
+
+    /**
      * Construct a LatLongElevation using a supplied latitude and longitude in degrees and an elevation.
      *
      * @param latitude  latitude in degrees
