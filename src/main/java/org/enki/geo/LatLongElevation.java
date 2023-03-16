@@ -80,4 +80,9 @@ public class LatLongElevation extends LatLong {
         return Objects.hash(super.hashCode(), elevation);
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + ", " + formatWithoutTrailingZeros(elevation.getValue().doubleValue()) + "m";
+    }
+
 }

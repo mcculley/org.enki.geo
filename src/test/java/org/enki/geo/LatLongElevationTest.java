@@ -36,4 +36,10 @@ public class LatLongElevationTest {
         assertEquals(9, Set.of(l1, "2", "3", "4", "5", "6", "7", "8", "9").size());
     }
 
+    @Test
+    public void testToString() {
+        final LatLongElevation l1 = new LatLongElevation(50, 20, Quantities.getQuantity(0, METRE));
+        assertEquals("50º, 20º, 0m",l1.toString());
+    }
+
 }

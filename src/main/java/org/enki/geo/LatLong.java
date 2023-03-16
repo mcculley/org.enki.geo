@@ -260,7 +260,7 @@ public class LatLong {
 
     // FIXME: Handle altitude in geo URI.
 
-    private static String formatWithoutTrailingZeros(final double x) {
+    protected static String formatWithoutTrailingZeros(final double x) {
         return Double.toString(x).replaceAll("\\.?0*$", "");
     }
 
