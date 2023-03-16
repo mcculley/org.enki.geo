@@ -45,7 +45,8 @@ public class PolarCoordinates {
     }
 
     /**
-     * Convert a PolarCoordinate to a Cartesian coordinate in Point2D.Double using a transformation for the angle.
+     * Convert a PolarCoordinate to a Cartesian coordinate in Point2D.Double using transformations for the angle and
+     * radius.
      *
      * @param radiusTransformer the Function to apply to the radius
      * @param thetaTransformer  the Function to apply to the angle
