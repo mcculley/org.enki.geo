@@ -50,11 +50,17 @@ public class LatLongElevation extends LatLong {
      * @param b the other LatLong coordinate
      * @return distance in meters
      */
-    public @NotNull Quantity<Length> distanceSquared(final @NotNull LatLongElevation b) {
-        final Quantity<Length> elevationDelta = b.elevation.subtract(elevation);
-        return Quantities
-                .getQuantity(super.distanceSquared(b).getValue().doubleValue() +
-                        Math.pow(elevationDelta.getValue().doubleValue(), 2), METRE);
+    @Override
+    public @NotNull Quantity<Length> distanceSquared(final @NotNull LatLong b) {
+        if (!(b instanceof LatLongElevation)) {
+            return super.distanceSquared(b);
+        } else {
+            final LatLongElevation eb = (LatLongElevation) b;
+            final Quantity<Length> elevationDelta = eb.elevation.subtract(elevation);
+            return Quantities
+                    .getQuantity(super.distanceSquared(b).getValue().doubleValue() +
+                            Math.pow(elevationDelta.getValue().doubleValue(), 2), METRE);
+        }
     }
 
     /**

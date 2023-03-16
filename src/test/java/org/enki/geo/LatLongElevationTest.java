@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import tech.units.indriya.quantity.Quantities;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,6 +18,7 @@ public class LatLongElevationTest {
         final LatLongElevation l1 = new LatLongElevation(50, 20, Quantities.getQuantity(0, METRE));
         final LatLongElevation l2 = new LatLongElevation(new LatLong(50, 20), Quantities.getQuantity(100, METRE));
         assertEquals(100, l1.distance(l2).getValue().doubleValue());
+        assertEquals(200, LatLong.distance(List.of(l1,l2,l1)).getValue().doubleValue());
     }
 
     @Test
