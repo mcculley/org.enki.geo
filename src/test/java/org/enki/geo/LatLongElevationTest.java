@@ -53,7 +53,9 @@ public class LatLongElevationTest {
     @Test
     public void testGeoURI() {
         final URI ag = URI.create("geo:25.25,-80.125,50");
-        assertEquals(ag, new LatLongElevation(25.25, -80.125, Quantities.getQuantity(50, METRE)).toGeoURI());
+        final LatLongElevation l1 = new LatLongElevation(25.25, -80.125, Quantities.getQuantity(50, METRE));
+        assertEquals(ag, l1.toGeoURI());
+        assertEquals(GeographyUtilities.parseGeoURI(ag), l1);
     }
 
 }

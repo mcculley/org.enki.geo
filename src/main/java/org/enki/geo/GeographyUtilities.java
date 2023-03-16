@@ -1,11 +1,16 @@
 package org.enki.geo;
 
 import org.jetbrains.annotations.NotNull;
+import tech.units.indriya.quantity.Quantities;
 
 import javax.measure.Quantity;
 import javax.measure.quantity.Angle;
 
+import java.net.URI;
+
+import static java.lang.Math.abs;
 import static systems.uom.common.USCustomary.DEGREE_ANGLE;
+import static tech.units.indriya.unit.Units.METRE;
 
 /**
  * Miscellaneous utilities for dealing with geography.
@@ -53,6 +58,36 @@ public class GeographyUtilities {
      */
     public static String formatWithoutTrailingZeros(final double x) {
         return Double.toString(x).replaceAll("\\.?0*$", "");
+    }
+
+    /**
+     * Construct a LatLong using a supplied geo URI (https://datatracker.ietf.org/doc/html/rfc5870).
+     *
+     * @param geoURI the GeoURI
+     */
+    public static LatLong parseGeoURI(final @NotNull URI geoURI) {
+        if (!geoURI.getScheme().equals("geo"))
+            throw new IllegalArgumentException(
+                    String.format("unexpected scheme '%s' in '%s'", geoURI.getScheme(), geoURI));
+
+        final String location = geoURI.getSchemeSpecificPart().split(";")[0];
+        final String[] coordinates = location.split(",");
+        final double latitude = Double.parseDouble(coordinates[0]);
+        final double longitude = Double.parseDouble(coordinates[1]);
+
+        if (abs(longitude) > 180)
+            throw new IllegalArgumentException("invalid longitude " + longitude);
+
+        if (abs(latitude) > 90)
+            throw new IllegalArgumentException("invalid latitude " + latitude);
+
+        if (coordinates.length == 2)
+            return new LatLong(latitude, longitude);
+        else if (coordinates.length == 3) {
+            final double elevationInMeters = Double.parseDouble(coordinates[2]);
+            return new LatLongElevation(latitude, longitude, Quantities.getQuantity(elevationInMeters, METRE));
+        } else
+            throw new IllegalArgumentException(String.format("unexpected number of coordinate parts in '%s'", geoURI));
     }
 
 }
