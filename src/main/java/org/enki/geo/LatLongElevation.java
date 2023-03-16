@@ -52,13 +52,11 @@ public class LatLongElevation extends LatLong {
      */
     @Override
     public @NotNull Quantity<Length> distanceSquared(final @NotNull LatLong b) {
-        final LatLongElevation other;
-        if (b instanceof LatLongElevation) {
-            other = (LatLongElevation) b;
-        } else {
-            other = new LatLongElevation(b, Quantities.getQuantity(0, METRE));
+        if (!(b instanceof LatLongElevation)) {
+            throw new IllegalArgumentException("cannot compute distance between 2D and 3D location");
         }
 
+        final LatLongElevation other = (LatLongElevation) b;
         final Quantity<Length> elevationDelta = other.elevation.subtract(elevation);
         return Quantities
                 .getQuantity(super.distanceSquared(b).getValue().doubleValue() +

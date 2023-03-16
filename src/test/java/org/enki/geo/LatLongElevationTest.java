@@ -9,6 +9,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static tech.units.indriya.unit.Units.METRE;
 
 public class LatLongElevationTest {
@@ -20,7 +21,8 @@ public class LatLongElevationTest {
         assertEquals(100, l1.distance(l2).getValue().doubleValue());
 
         assertEquals(200, LatLong.distance(List.of(l1, l2, l1)).getValue().doubleValue());
-        assertEquals(200, LatLong.distance(List.of(l1, l2, new LatLong(50, 20))).getValue().doubleValue());
+        assertThrows(IllegalArgumentException.class,
+                () -> LatLong.distance(List.of(l1, l2, new LatLong(50, 20))).getValue().doubleValue());
     }
 
     @Test

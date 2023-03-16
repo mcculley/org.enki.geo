@@ -107,6 +107,10 @@ public class LatLong {
      * @return distance in meters
      */
     public @NotNull Quantity<Length> distanceSquared(final @NotNull LatLong b) {
+        if (!(this instanceof LatLongElevation) && b instanceof LatLongElevation) {
+            throw new IllegalArgumentException("cannot compute distance between 2D and 3D location");
+        }
+
         // FIXME: See org.geotools.geometry.jts.JTS.orthodromicDistance for a more accurate way to calculate distance.
         final double latDistance = toRadians(b.latitude - latitude);
         final double lonDistance = toRadians(b.longitude - longitude);
@@ -260,6 +264,13 @@ public class LatLong {
 
     // FIXME: Handle altitude in geo URI.
 
+    /**
+     * Given a floating point number, render it into a String with no trailing zeros. (e.g. 25.0 renders as "25" and
+     * 25.050 renders as "25.05").
+     *
+     * @param x the number to render
+     * @return a String with no trailing zeros or decimal point if there are no fractional digits
+     */
     protected static String formatWithoutTrailingZeros(final double x) {
         return Double.toString(x).replaceAll("\\.?0*$", "");
     }
