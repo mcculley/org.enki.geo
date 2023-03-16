@@ -6,6 +6,7 @@ import tech.units.indriya.quantity.Quantities;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static tech.units.indriya.unit.Units.METRE;
 
 public class LatLongElevationTest {
@@ -21,7 +22,12 @@ public class LatLongElevationTest {
     public void testEquality() {
         final LatLongElevation l1 = new LatLongElevation(50, 20, Quantities.getQuantity(0, METRE));
         final LatLongElevation l2 = new LatLongElevation(new LatLong(50, 20), Quantities.getQuantity(0, METRE));
+        final LatLongElevation l3 = new LatLongElevation(new LatLong(50, 30), Quantities.getQuantity(0, METRE));
         assertEquals(l1, l2);
+        assertNotEquals(l1, null);
+        assertNotEquals(l1, "not a location");
+        assertEquals(l1, l1);
+        assertNotEquals(l1,l3);
     }
 
     @Test
