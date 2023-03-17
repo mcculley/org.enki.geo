@@ -7,6 +7,7 @@ import javax.measure.quantity.Angle;
 import java.awt.geom.Point2D;
 import java.util.function.Function;
 
+import static org.enki.core.Utilities.formatWithoutTrailingZeros;
 import static tech.units.indriya.unit.Units.RADIAN;
 
 /**
@@ -63,7 +64,7 @@ public class PolarCoordinates {
 
     @Override
     public @NotNull String toString() {
-        return "(" + GeographyUtilities.formatWithoutTrailingZeros(r) + ", " + GeographyUtilities.formatWithoutTrailingZeros(theta) + "º)";
+        return "(" + formatWithoutTrailingZeros(r) + ", " + formatWithoutTrailingZeros(theta) + "º)";
     }
 
 }

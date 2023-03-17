@@ -1,5 +1,6 @@
 package org.enki.geo;
 
+import org.enki.core.ExcludeFromJacocoGeneratedReport;
 import org.jetbrains.annotations.NotNull;
 import tech.units.indriya.quantity.Quantities;
 
@@ -17,6 +18,7 @@ import static tech.units.indriya.unit.Units.METRE;
  */
 public class GeographyUtilities {
 
+    @ExcludeFromJacocoGeneratedReport
     private GeographyUtilities() {
         throw new AssertionError("static utility class is not intended to be instantiated");
     }
@@ -50,22 +52,12 @@ public class GeographyUtilities {
     }
 
     /**
-     * Given a floating point number, render it into a String with no trailing zeros. (e.g. 25.0 renders as "25" and
-     * 25.050 renders as "25.05").
-     *
-     * @param x the number to render
-     * @return a String with no trailing zeros or decimal point if there are no fractional digits
-     */
-    public static String formatWithoutTrailingZeros(final double x) {
-        return Double.toString(x).replaceAll("\\.?0*$", "");
-    }
-
-    /**
      * Construct a LatLong using a supplied geo URI (https://datatracker.ietf.org/doc/html/rfc5870).
      *
-     * @param geoURI the GeoURI
+     * @param geoURI the geo URI
+     * @return a <code>LatLong</code> or <code>LatLongElevation</code>, depending on the kind of geo URI
      */
-    public static LatLong parseGeoURI(final @NotNull URI geoURI) {
+    public static @NotNull LatLong parseGeoURI(final @NotNull URI geoURI) {
         if (!geoURI.getScheme().equals("geo"))
             throw new IllegalArgumentException(
                     String.format("unexpected scheme '%s' in '%s'", geoURI.getScheme(), geoURI));

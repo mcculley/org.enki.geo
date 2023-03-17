@@ -8,7 +8,6 @@ import javax.measure.quantity.Length;
 import org.junit.jupiter.api.Test;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +15,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 import static systems.uom.common.USCustomary.DEGREE_ANGLE;
 import static systems.uom.common.USCustomary.NAUTICAL_MILE;
+import static org.enki.core.Collections.concat;
 
 class LatLongTest {
 
@@ -155,13 +155,6 @@ class LatLongTest {
         assertEquals(0, ldms1.longitudeSeconds);
         assertEquals("27º 30' 0\" S, 82º 45' 0\" E", ldms1.toString());
         assertEquals(l1, ldms1.getLatLong());
-    }
-
-    private static <T> List<T> concat(final T a, final List<T> b) {
-        final List<T> l = new ArrayList<>();
-        l.add(a);
-        l.addAll(b);
-        return l;
     }
 
     @Test

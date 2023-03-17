@@ -6,7 +6,7 @@
 
     <groupId>org.enki</groupId>
     <artifactId>geo</artifactId>
-    <version>0.0.68</version>
+    <version>0.0.69</version>
 
     <name>org.enki.geo</name>
     <description>Some handy geo utilities.</description>
@@ -47,6 +47,12 @@
             <artifactId>annotations</artifactId>
             <version>23.0.0</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.enki</groupId>
+            <artifactId>core</artifactId>
+            <version>[0.0.69,)</version>
         </dependency>
 
         <dependency>

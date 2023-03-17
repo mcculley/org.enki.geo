@@ -23,6 +23,7 @@ import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 import static java.lang.Math.toDegrees;
 import static java.lang.Math.toRadians;
+import static org.enki.core.Utilities.formatWithoutTrailingZeros;
 import static systems.uom.common.USCustomary.DEGREE_ANGLE;
 import static tech.units.indriya.unit.Units.METRE;
 import static tech.units.indriya.unit.Units.RADIAN;
@@ -233,8 +234,7 @@ public class LatLong {
 
     @Override
     public @NotNull String toString() {
-        return String.format("%sº, %sº", GeographyUtilities.formatWithoutTrailingZeros(latitude),
-                GeographyUtilities.formatWithoutTrailingZeros(longitude));
+        return String.format("%sº, %sº", formatWithoutTrailingZeros(latitude), formatWithoutTrailingZeros(longitude));
     }
 
     /**
@@ -243,8 +243,8 @@ public class LatLong {
      * @return this location encoded as a geo URI.
      */
     public @NotNull URI toGeoURI() {
-        return URI.create(String.format("geo:%s,%s", GeographyUtilities.formatWithoutTrailingZeros(latitude),
-                GeographyUtilities.formatWithoutTrailingZeros(longitude)));
+        return URI.create(String.format("geo:%s,%s", formatWithoutTrailingZeros(latitude),
+                formatWithoutTrailingZeros(longitude)));
     }
 
     /**
@@ -290,8 +290,8 @@ public class LatLong {
 
         public @NotNull String toString() {
             return String.format("%dº %s', %dº %s'", latitudeDegrees,
-                    GeographyUtilities.formatWithoutTrailingZeros(latitudeDecimalMinutes), longitudeDegrees,
-                    GeographyUtilities.formatWithoutTrailingZeros(longitudeDecimalMinutes));
+                    formatWithoutTrailingZeros(latitudeDecimalMinutes), longitudeDegrees,
+                    formatWithoutTrailingZeros(longitudeDecimalMinutes));
         }
 
         /**
@@ -301,9 +301,9 @@ public class LatLong {
          */
         public @NotNull String toStringCardinal() {
             return String.format("%dº %s' %c, %dº %s' %c", abs(latitudeDegrees),
-                    GeographyUtilities.formatWithoutTrailingZeros(latitudeDecimalMinutes),
+                    formatWithoutTrailingZeros(latitudeDecimalMinutes),
                     (latitudeDegrees > 0 ? 'N' : 'S'),
-                    abs(longitudeDegrees), GeographyUtilities.formatWithoutTrailingZeros(longitudeDecimalMinutes),
+                    abs(longitudeDegrees), formatWithoutTrailingZeros(longitudeDecimalMinutes),
                     (longitudeDegrees > 0 ? 'E' : 'W'));
         }
 
@@ -398,10 +398,10 @@ public class LatLong {
         public @NotNull String toString() {
             return String.format("%dº %d' %s\" %c, %dº %d' %s\" %c",
                     abs(latitudeDegrees), latitudeMinutes,
-                    GeographyUtilities.formatWithoutTrailingZeros(latitudeSeconds),
+                    formatWithoutTrailingZeros(latitudeSeconds),
                     (latitudeDegrees > 0 ? 'N' : 'S'),
                     abs(longitudeDegrees), longitudeMinutes,
-                    GeographyUtilities.formatWithoutTrailingZeros(longitudeSeconds),
+                    formatWithoutTrailingZeros(longitudeSeconds),
                     (longitudeDegrees > 0 ? 'E' : 'W'));
         }
 
